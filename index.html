@@ -38,6 +38,7 @@
       <div>
         <label class="font-semibold block mb-1">Milk Formula</label>
         <select id="milk" class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
+          <!-- Reordered List -->
           <option value="Glucerna">Glucerna</option>
           <option value="Nutrien Optimum">Nutrien Optimum</option>
           <option value="Novasource Renal">Novasource Renal</option>
@@ -112,6 +113,7 @@
       const totalUnits = kcal / perUnitKcal;
       const perFeedUnits = totalUnits / 8;
 
+      // Volume calculation for bottle-based formulas
       let volumeText = "";
       if (milkChoice === "Novasource Renal" || milkChoice === "Nephro") {
         const totalMl = totalUnits * milk.volume;
