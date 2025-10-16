@@ -111,18 +111,19 @@
       const milk = milkOptions[milkChoice];
       const perUnitKcal = milk.kcal;
 
-      // Divide into 7 feeds per day
+      // Divide into 7 feeds per 24 hours
+      const feedsPerDay = 7;
       const totalUnits = kcal / perUnitKcal;
-      const perFeedUnits = totalUnits / 7;
+      const perFeedUnits = totalUnits / feedsPerDay;
 
       // Volume calculation for bottle-based formulas
       let volumeText = "";
       if (milkChoice === "Novasource Renal" || milkChoice === "Nephro") {
         const totalMl = totalUnits * milk.volume;
-        const perFeedMl = totalMl / 7;
+        const perFeedMl = totalMl / feedsPerDay;
         volumeText = `
           <p><strong>Total Volume (24 hrs):</strong> ${totalMl.toFixed(0)} mL</p>
-          <p><strong>Per Feed (7 feeds/day):</strong> ${perFeedMl.toFixed(0)} mL</p>
+          <p><strong>Per Feed (${feedsPerDay} feeds/24 hrs):</strong> ${perFeedMl.toFixed(0)} mL</p>
         `;
       }
 
@@ -148,7 +149,7 @@
         <p><strong>Selected Formula:</strong> ${milkChoice}</p>
         <p>Each ${milk.unit} provides ${milk.kcal} kcal and ${milk.protein} g protein.</p>
         <p><strong>Total (24 hrs):</strong> ${totalUnits.toFixed(1)} ${milk.unit}(s)</p>
-        <p><strong>Per Feed (7 feeds/day):</strong> ${perFeedUnits.toFixed(2)} ${milk.unit}(s) per feed</p>
+        <p><strong>Per Feed (${feedsPerDay} feeds/24 hrs):</strong> ${perFeedUnits.toFixed(2)} ${milk.unit}(s) per feed</p>
         ${volumeText}
         <p>Each feed provides approximately 
           <span class="font-semibold text-blue-700">${kcalFeed.toFixed(0)} kcal</span> and 
