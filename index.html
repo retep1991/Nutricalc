@@ -110,17 +110,19 @@
 
       const milk = milkOptions[milkChoice];
       const perUnitKcal = milk.kcal;
+
+      // Divide into 7 feeds per day
       const totalUnits = kcal / perUnitKcal;
-      const perFeedUnits = totalUnits / 8;
+      const perFeedUnits = totalUnits / 7;
 
       // Volume calculation for bottle-based formulas
       let volumeText = "";
       if (milkChoice === "Novasource Renal" || milkChoice === "Nephro") {
         const totalMl = totalUnits * milk.volume;
-        const perFeedMl = totalMl / 8;
+        const perFeedMl = totalMl / 7;
         volumeText = `
           <p><strong>Total Volume (24 hrs):</strong> ${totalMl.toFixed(0)} mL</p>
-          <p><strong>Per Feed (every 3 hrs):</strong> ${perFeedMl.toFixed(0)} mL</p>
+          <p><strong>Per Feed (7 feeds/day):</strong> ${perFeedMl.toFixed(0)} mL</p>
         `;
       }
 
@@ -130,22 +132,23 @@
       const result = document.getElementById("result");
       result.classList.remove("hidden");
 
-      const ibwNote = usedIBW
-        ? `<p class="text-sm text-amber-600 mt-2"><strong>Note:</strong> Ideal Body Weight (IBW) was used for kilocalorie calculation due to BMI > 50.</p>`
-        : "";
+      const ibwText = usedIBW
+        ? `<span class="text-amber-600 text-sm">(IBW used)</span>`
+        : `<span class="text-green-600 text-sm">(Actual weight used)</span>`;
 
       result.innerHTML = `
         <h2 class="text-xl font-bold text-blue-700 mb-4">Results</h2>
         <p><strong>BMI:</strong> <span class="text-blue-700 font-semibold">${bmi.toFixed(2)}</span></p>
         <p><strong>Ideal Body Weight:</strong> <span class="text-blue-700 font-semibold">${ibw.toFixed(2)} kg</span></p>
-        <p><strong>Daily Kilocalorie Requirement:</strong> <span class="text-blue-700 font-semibold">${kcal.toFixed(2)} kcal</span></p>
-        ${ibwNote}
-        <p><strong>Daily Protein Requirement:</strong> <span class="text-blue-700 font-semibold">${protein.toFixed(2)} g</span></p>
+        <p><strong>Daily Kilocalorie Requirement:</strong> 
+          <span class="text-blue-700 font-semibold">${kcal.toFixed(2)} kcal</span> ${ibwText}</p>
+        <p><strong>Daily Protein Requirement:</strong> 
+          <span class="text-blue-700 font-semibold">${protein.toFixed(2)} g</span></p>
         <hr class="my-4">
         <p><strong>Selected Formula:</strong> ${milkChoice}</p>
         <p>Each ${milk.unit} provides ${milk.kcal} kcal and ${milk.protein} g protein.</p>
         <p><strong>Total (24 hrs):</strong> ${totalUnits.toFixed(1)} ${milk.unit}(s)</p>
-        <p><strong>Every 3 hrs (8 feeds/day):</strong> ${perFeedUnits.toFixed(2)} ${milk.unit}(s) per feed</p>
+        <p><strong>Per Feed (7 feeds/day):</strong> ${perFeedUnits.toFixed(2)} ${milk.unit}(s) per feed</p>
         ${volumeText}
         <p>Each feed provides approximately 
           <span class="font-semibold text-blue-700">${kcalFeed.toFixed(0)} kcal</span> and 
