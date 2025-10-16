@@ -148,7 +148,9 @@
         <hr class="my-4">
         <p><strong>Selected Formula:</strong> ${milkChoice}</p>
         <p>Each ${milk.unit} provides ${milk.kcal} kcal and ${milk.protein} g protein.</p>
-        <p><strong>Total (24 hrs):</strong> ${totalUnits.toFixed(1)} ${milk.unit}(s)</p>
+        <p><strong>Total (24 hrs):</strong> 
+          <span class="text-red-600 font-bold text-lg">${totalUnits.toFixed(1)} ${milk.unit}(s)</span>
+        </p>
         <p><strong>Per Feed (${feedsPerDay} feeds/24 hrs):</strong> ${perFeedUnits.toFixed(2)} ${milk.unit}(s) per feed</p>
         ${volumeText}
         <p>Each feed provides approximately 
