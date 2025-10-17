@@ -38,7 +38,6 @@
       <div>
         <label class="font-semibold block mb-1">Milk Formula</label>
         <select id="milk" class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
-          <!-- Reordered List -->
           <option value="Glucerna">Glucerna</option>
           <option value="Nutrien Optimum">Nutrien Optimum</option>
           <option value="Novasource Renal">Novasource Renal</option>
@@ -58,6 +57,25 @@
 
     <!-- Results -->
     <div id="result" class="mt-8 hidden bg-gray-50 border border-gray-200 rounded-xl p-6"></div>
+
+    <!-- ASPEN Citation -->
+    <div class="mt-6 text-center text-sm text-gray-500 border-t pt-4">
+      <p>
+        <strong>Note:</strong> Kilocalorie and protein requirements are based on
+        recommendations from the 
+        <em>American Society for Parenteral and Enteral Nutrition (ASPEN)</em> Clinical Guidelines.
+      </p>
+      <p class="mt-2 italic text-gray-400">
+        Source: Compher C, Bingham AL, McCall M, et al. 
+        <br>
+        <span class="block">
+          <em>Guidelines for the Provision of Nutrition Support Therapy in the Adult Critically Ill Patient:</em> 
+          ASPEN. <a href="https://aspenjournals.onlinelibrary.wiley.com/doi/10.1002/jpen.2039" 
+          target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+          JPEN J Parenter Enteral Nutr. 2021;45(5):875–894.</a>
+        </span>
+      </p>
+    </div>
   </div>
 
   <script>
@@ -92,7 +110,7 @@
       if (sex === "male") ibw = 50 + 2.3 * (heightIn - 60);
       else ibw = 45.5 + 2.3 * (heightIn - 60);
 
-      // Calorie Requirement
+      // Calorie Requirement (ASPEN 2021)
       let kcal;
       let usedIBW = false;
       if (bmi < 30) kcal = weight * 25;
@@ -102,7 +120,7 @@
         usedIBW = true;
       }
 
-      // Protein Requirement
+      // Protein Requirement (ASPEN 2021)
       let protein;
       if (bmi < 30) protein = weight * 2;
       else if (bmi < 40) protein = ibw * 2;
@@ -111,7 +129,6 @@
       const milk = milkOptions[milkChoice];
       const perUnitKcal = milk.kcal;
 
-      // Divide into 7 feeds per 24 hours
       const feedsPerDay = 7;
       const totalUnits = kcal / perUnitKcal;
       const perFeedUnits = totalUnits / feedsPerDay;
