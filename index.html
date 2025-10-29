@@ -50,7 +50,7 @@
       </div>
     </div>
 
-    <button onclick="calculate()"
+    <button id="calcButton"
       class="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition">
       Calculate
     </button>
@@ -90,6 +90,7 @@
       "Myotein": { kcal: 22, protein: 5, unit: "scoop" }
     };
 
+    // Function to calculate results
     function calculate() {
       const sex = document.getElementById("sex").value;
       const height = parseFloat(document.getElementById("height").value);
@@ -175,6 +176,27 @@
         </p>
       `;
     }
+
+    // --- ENTER KEY HANDLING ---
+    const heightInput = document.getElementById("height");
+    const weightInput = document.getElementById("weight");
+    const calcButton = document.getElementById("calcButton");
+
+    // Press Enter on height -> moves to weight
+    heightInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        weightInput.focus();
+      }
+    });
+
+    // Press Enter on weight -> triggers calculation
+    weightInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        calcButton.click();
+      }
+    });
   </script>
 </body>
 </html>
